@@ -15,7 +15,7 @@ Example:
         <template is="dom-repeat" items="{{ points }}">
           <osm-point longitude$="{{ item.longitude }}" latitude$="{{ item.latitude }}"></osm-point>
         </template>
-    </osm-poly> 
+    </osm-poly>
 
 @demo demo/index.html
 -->
@@ -27,7 +27,7 @@ Example:
       properties: {
         /**
          * The stroke color.
-         */ 
+         */
         strokeColor: {
           type: String,
           value: '#0091ea',
@@ -53,7 +53,7 @@ Example:
         },
 
         /**
-         * Defines a fill color for the polygon. Requires fill = true. 
+         * Defines a fill color for the polygon. Requires fill = true.
          */
         fillColor: {
           type: String,
@@ -62,7 +62,7 @@ Example:
         },
 
         /**
-         * The polygon interior transparency  
+         * The polygon interior transparency
          */
         fillOpacity: {
           type: Number,
@@ -72,27 +72,27 @@ Example:
       },
 
       attached: function (argument) {
-        this._observer = Polymer.dom(this).observeNodes( function(info) {
+        this._observer = Polymer.dom(this).observeNodes(function (info) {
           this.fire('update-layers');
         });
       },
 
-      _computeColor: function() {
+      _computeColor: function () {
         if (this.fillColor.charAt(0) == "#") {
           var h = "0123456789abcdef";
           var hex = this.fillColor.toLowerCase();
-          var r = h.indexOf(hex[1])*16+h.indexOf(hex[2]);
-          var g = h.indexOf(hex[3])*16+h.indexOf(hex[4]);
-          var b = h.indexOf(hex[5])*16+h.indexOf(hex[6]);
-          return "rgba("+r+", "+g+", "+b+", "+fillOpacity+")";
+          var r = h.indexOf(hex[1]) * 16 + h.indexOf(hex[2]);
+          var g = h.indexOf(hex[3]) * 16 + h.indexOf(hex[4]);
+          var b = h.indexOf(hex[5]) * 16 + h.indexOf(hex[6]);
+          return "rgba(" + r + ", " + g + ", " + b + ", " + fillOpacity + ")";
         }
         else if (this.fillColor.substring(0, 4).toLowerCase() == "rgba") {
-          console.warn('Polygon fill-color is an rgba value so fill-opacity will be overwritten!' 
-          + ' You shout better use an rgb or hex value combined with fill-opacity attribute.');
+          console.warn('Polygon fill-color is an rgba value so fill-opacity will be overwritten!'
+                  + ' You shout better use an rgb or hex value combined with fill-opacity attribute.');
           return this.fillColor;
         }
         else if (this.fillColor.substring(0, 4).toLowerCase() == "rgb(") {
-          return "rgba"+this.fillColor.slice(3,-1)+","+this.fillOpacity+")";
+          return "rgba" + this.fillColor.slice(3, -1) + "," + this.fillOpacity + ")";
         }
         else { // assume this.fillColor must be a name like blue, white, black
           dummy = document.createElement("div");
@@ -100,38 +100,39 @@ Example:
           document.body.appendChild(dummy);
           var rgbColor = window.getComputedStyle(dummy).color;
           document.body.removeChild(dummy);
-          return "rgba"+rgbColor.slice(3,-1)+","+this.fillOpacity+")";
-        };
+          return "rgba" + rgbColor.slice(3, -1) + "," + this.fillOpacity + ")";
+        }
+        ;
       },
 
-      polygon: function() {
+      polygon: function () {
         var points = [];
-        $.each(this.queryAllEffectiveChildren('osm-point'), function(index, point) {
+        $.each(this.queryAllEffectiveChildren('osm-point'), function (index, point) {
           points.push(point.position());
         });
 
         var features;
-        if(this.closed) {
+        if (this.closed) {
           features = new ol.Feature({
-              geometry: new ol.geom.Polygon([points])
+            geometry: new ol.geom.Polygon([points])
           });
           features.getGeometry().transform('EPSG:4326', 'EPSG:3857');
         }
         else {
           var geometry = new ol.geom.LineString(points, 'XY');
           geometry.transform('EPSG:4326', 'EPSG:3857')
-          features = new ol.Feature({ geometry: geometry });     
+          features = new ol.Feature({geometry: geometry});
         }
 
         return new ol.layer.Vector({
           source: new ol.source.Vector({
-              features: [features]
+            features: [features]
           }),
           style: new ol.style.Style({
-              stroke: new ol.style.Stroke({ color: this.strokeColor, width: this.width }),
-              fill: new ol.style.Fill({
-                color: this.closed ? this._computeColor() : 'rgba(0,0,0,0)'
-              })
+            stroke: new ol.style.Stroke({color: this.strokeColor, width: this.width}),
+            fill: new ol.style.Fill({
+              color: this.closed ? this._computeColor() : 'rgba(0,0,0,0)'
+            })
           }),
           name: 'routeLayer'
         });

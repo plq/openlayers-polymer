@@ -28,7 +28,7 @@ The `osm-layer` element allows to add different layer typs to the `osm-map` elem
         },
 
         /**
-         * Preload. Load low-resolution tiles up to preload levels. 
+         * Preload. Load low-resolution tiles up to preload levels.
          * By default preload is 0, which means no preloading.
          */
         preload: {
@@ -63,7 +63,7 @@ The `osm-layer` element allows to add different layer typs to the `osm-map` elem
         bingMapStyle: {
           type: String,
           value: 'AerialWithLabels'
-        } 
+        }
 
       },
 
@@ -78,8 +78,8 @@ The `osm-layer` element allows to add different layer typs to the `osm-map` elem
        * Returns the computed ol.layer.Tile object.
        * See (http://openlayers.org/en/v3.8.2/apidoc/ol.layer.Tile.html)
        */
-      get: function() {
-        if(this.source == "bing") {
+      get: function () {
+        if (this.source == "bing") {
           return new ol.layer.Tile({
             visible: this.visible,
             preload: this.preload,
@@ -91,10 +91,10 @@ The `osm-layer` element allows to add different layer typs to the `osm-map` elem
           });
         }
         else {
-          return new ol.layer.Tile({ 
+          return new ol.layer.Tile({
             visible: this.visible,
             preload: this.preload,
-            source: new ol.source.MapQuest({ layer: this.source }) 
+            source: new ol.source.MapQuest({layer: this.source})
           });
         }
       }

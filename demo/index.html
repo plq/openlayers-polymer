@@ -1,146 +1,146 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>osm-map Demo</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="../../paper-input/paper-input.html">
-    <link rel="import" href="../../paper-drawer-panel/paper-drawer-panel.html">
-    <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
-    <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
-    <link rel="import" href="../../paper-toolbar/paper-toolbar.html">
-    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="../../paper-button/paper-button.html">
-    <link rel="import" href="../../paper-item/paper-item.html">
-    <link rel="import" href="../../paper-menu/paper-menu.html">
-    <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../iron-icon/iron-icon.html">
-    <link rel="import" href="../../iron-ajax/iron-ajax.html">
-    <link rel="import" href="../../paper-styles/color.html">
-    <link rel="import" href="../osm-map.html">
-    <link rel="import" href="../osm-marker.html">
-    <link rel="import" href="../osm-layer.html">
-    <link rel="import" href="../osm-poly.html">
-    <link rel="import" href="../osm-point.html">
-    <style type="text/css">
-      html, body {
-        height: 100%;
-        width: 100%;
-        margin : 0;
-        overflow: hidden;  
-        font-family: 'Open Sans', sans-serif;
-      }
-
-      paper-button {
-        background-color: #3f51b5;
-        color: white;
-      }
-
-      paper-button.green {
-        background-color: #4caf50;
-      }
-    </style>
-  </head>
-  <body unresolved>
-    <template id="demo" is="dom-bind">
-      <iron-ajax
-        id="ajax"
-        verbose
-        handle-as="json"
-        on-response="finishedGeocoding">
-      </iron-ajax>
-
-      <paper-drawer-panel>
-        <paper-header-panel drawer>
-          <paper-toolbar>
-            <h3><code>&lt;osm-map&gt;</code> Demo</h3>
-          </paper-toolbar>
-          <div main>
-            <paper-dropdown-menu label="Map source">
-              <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{ mapSource }}">
-                  <paper-item value="osm">Osm</paper-item>
-                  <paper-item value="sat">Satalite</paper-item>
-                  <paper-item value="hyb">Hybrid</paper-item>
-                  <paper-item value="bing">Bing</paper-item>
-              </paper-menu>
-            </paper-dropdown-menu>
-
-            <paper-input id="search" label="Search" placeholder="Set a address"></paper-input>
-
-            <paper-button class="green" role="button" on-tap="search" raised>
-              <iron-icon icon="send"></iron-icon>
-              Search
-            </paper-button>
-
-            <paper-button 
-              raised
-              class="colored"
-              on-tap="locate">
-              <iron-icon icon="explore"></iron-icon>
-              Locate
-            </paper-button>
-          </div>
-        </paper-header-panel>
-        <paper-header-panel main>
-          <paper-toolbar>
-            <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-          </paper-toolbar>
-          
-          <osm-map class="content fit" 
-            longitude="{{ longitude }}" 
-            latitude="{{ latitude }}" 
-            zoom="{{ zoom }}">
-              <osm-layer source="{{ mapSource }}"></osm-layer>
-              <osm-marker longitude="10.7001245" latitude="53.8338072"></osm-marker>
-              <osm-marker color="#00cc00" longitude="10.7000245" latitude="53.8638072"></osm-marker>
-              <osm-marker color="#0000cc" longitude="10.7010245" latitude="53.8238072"></osm-marker>
-              <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red" closed>
-                <osm-point latitude="53.699089" longitude="10.603718"></osm-point>
-                <osm-point latitude="53.694089" longitude="10.608718"></osm-point>
-                <osm-point latitude="53.689089" longitude="10.603718"></osm-point>
-              </osm-poly>
-
-              <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red">
-                <osm-point latitude="54.699089" longitude="11.603718"></osm-point>
-                <osm-point latitude="54.694089" longitude="11.608718"></osm-point>
-                <osm-point latitude="54.689089" longitude="11.603718"></osm-point>
-                <osm-point latitude="54.694089" longitude="11.598718"></osm-point>
-              </osm-poly>
-          </osm-map>
-
-        </paper-header-panel>
-      </paper-drawer-panel>
-    </template>
-  </body>
-  <script>
-    var demo = document.querySelector('#demo');
-    demo.mapSource = "osm";
-
-    demo.search = function (event) {
-      var ajax = document.querySelector('#ajax');
-      var search = document.querySelector('#search');
-      ajax.url = "http://nominatim.openstreetmap.org/search?format=json&q="+search.value;
-      ajax.generateRequest();
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>osm-map Demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../../paper-input/paper-input.html">
+  <link rel="import" href="../../paper-drawer-panel/paper-drawer-panel.html">
+  <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
+  <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
+  <link rel="import" href="../../paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="../../paper-item/paper-item.html">
+  <link rel="import" href="../../paper-menu/paper-menu.html">
+  <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="../../iron-icons/iron-icons.html">
+  <link rel="import" href="../../iron-icon/iron-icon.html">
+  <link rel="import" href="../../iron-ajax/iron-ajax.html">
+  <link rel="import" href="../../paper-styles/color.html">
+  <link rel="import" href="../osm-map.html">
+  <link rel="import" href="../osm-marker.html">
+  <link rel="import" href="../osm-layer.html">
+  <link rel="import" href="../osm-poly.html">
+  <link rel="import" href="../osm-point.html">
+  <style type="text/css">
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Open Sans', sans-serif;
     }
 
-    demo.locate = function (event) {
-      navigator.geolocation.getCurrentPosition( function (position) {
-        demo.longitude = position.coords.longitude;
-        demo.latitude = position.coords.latitude;
-        demo.zoom = 18;
-      });
+    paper-button {
+      background-color: #3f51b5;
+      color: white;
     }
 
-    demo.finishedGeocoding = function (request) {
-      var result = request.detail.response[0];
-      if(result) {
-        document.querySelector('#search').value = result.display_name;
-        demo.longitude = result.lon;
-        demo.latitude = result.lat;
-        demo.zoom = 18;
-      }
+    paper-button.green {
+      background-color: #4caf50;
     }
-  </script>
+  </style>
+</head>
+<body unresolved>
+<template id="demo" is="dom-bind">
+  <iron-ajax
+          id="ajax"
+          verbose
+          handle-as="json"
+          on-response="finishedGeocoding">
+  </iron-ajax>
+
+  <paper-drawer-panel>
+    <paper-header-panel drawer>
+      <paper-toolbar>
+        <h3><code>&lt;osm-map&gt;</code> Demo</h3>
+      </paper-toolbar>
+      <div main>
+        <paper-dropdown-menu label="Map source">
+          <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{ mapSource }}">
+            <paper-item value="osm">Osm</paper-item>
+            <paper-item value="sat">Satalite</paper-item>
+            <paper-item value="hyb">Hybrid</paper-item>
+            <paper-item value="bing">Bing</paper-item>
+          </paper-menu>
+        </paper-dropdown-menu>
+
+        <paper-input id="search" label="Search" placeholder="Set a address"></paper-input>
+
+        <paper-button class="green" role="button" on-tap="search" raised>
+          <iron-icon icon="send"></iron-icon>
+          Search
+        </paper-button>
+
+        <paper-button
+                raised
+                class="colored"
+                on-tap="locate">
+          <iron-icon icon="explore"></iron-icon>
+          Locate
+        </paper-button>
+      </div>
+    </paper-header-panel>
+    <paper-header-panel main>
+      <paper-toolbar>
+        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+      </paper-toolbar>
+
+      <osm-map class="content fit"
+               longitude="{{ longitude }}"
+               latitude="{{ latitude }}"
+               zoom="{{ zoom }}">
+        <osm-layer source="{{ mapSource }}"></osm-layer>
+        <osm-marker longitude="10.7001245" latitude="53.8338072"></osm-marker>
+        <osm-marker color="#00cc00" longitude="10.7000245" latitude="53.8638072"></osm-marker>
+        <osm-marker color="#0000cc" longitude="10.7010245" latitude="53.8238072"></osm-marker>
+        <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red" closed>
+          <osm-point latitude="53.699089" longitude="10.603718"></osm-point>
+          <osm-point latitude="53.694089" longitude="10.608718"></osm-point>
+          <osm-point latitude="53.689089" longitude="10.603718"></osm-point>
+        </osm-poly>
+
+        <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red">
+          <osm-point latitude="54.699089" longitude="11.603718"></osm-point>
+          <osm-point latitude="54.694089" longitude="11.608718"></osm-point>
+          <osm-point latitude="54.689089" longitude="11.603718"></osm-point>
+          <osm-point latitude="54.694089" longitude="11.598718"></osm-point>
+        </osm-poly>
+      </osm-map>
+
+    </paper-header-panel>
+  </paper-drawer-panel>
+</template>
+</body>
+<script>
+  var demo = document.querySelector('#demo');
+  demo.mapSource = "osm";
+
+  demo.search = function (event) {
+    var ajax = document.querySelector('#ajax');
+    var search = document.querySelector('#search');
+    ajax.url = "http://nominatim.openstreetmap.org/search?format=json&q=" + search.value;
+    ajax.generateRequest();
+  }
+
+  demo.locate = function (event) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      demo.longitude = position.coords.longitude;
+      demo.latitude = position.coords.latitude;
+      demo.zoom = 18;
+    });
+  }
+
+  demo.finishedGeocoding = function (request) {
+    var result = request.detail.response[0];
+    if (result) {
+      document.querySelector('#search').value = result.display_name;
+      demo.longitude = result.lon;
+      demo.latitude = result.lat;
+      demo.zoom = 18;
+    }
+  }
+</script>
 </html>

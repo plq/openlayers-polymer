@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="osm-layer.html">
-<link rel="stylesheet" href="http://openlayers.org/en/v3.11.2/css/ol.css" type="text/css">
+<link rel="stylesheet" href="../openlayers/css/ol.css" type="text/css">
 <script src="../jquery/dist/jquery.min.js"></script>
 <script src="../openlayers/build/ol.js"></script>
 
@@ -41,7 +41,7 @@ The `osm-map` element renders a OpenStreetMap.
          */
         latitude: {
           type: Number,
-          value: 53.834089,          
+          value: 53.834089,
           notify: true,
           reflectToAttribute: true
         },
@@ -67,7 +67,7 @@ The `osm-map` element renders a OpenStreetMap.
 
         /**
          * Zoom level will be apply to the map.
-         */ 
+         */
         zoom: {
           type: Number,
           value: 12,
@@ -96,38 +96,38 @@ The `osm-map` element renders a OpenStreetMap.
 
       /**
        * Get osm-layer children and convert them to a ol.layer.Tile
-       * Compute all osm-marker and osm-poly components to ol.layer.Vector 
+       * Compute all osm-marker and osm-poly components to ol.layer.Vector
        * Add all converted elements to the map.
        */
-      attached: function() {
+      attached: function () {
         self = this;
         this.map = new ol.Map({
           layers: this.layers,
           target: 'map',
           controls: ol.control.defaults({
-            attributionOptions: ({ collapsible: false })
+            attributionOptions: ({collapsible: false})
           }),
           view: new ol.View({
             zoom: this.zoom
           })
         });
-        
+
         this.updateLayers();
         this.map.getView().setCenter(ol.proj.fromLonLat([this.longitude, this.latitude]));
-        
+
         // Update zoom property if map resolution change
-        this.map.getView().on('change:resolution', function() {
+        this.map.getView().on('change:resolution', function () {
           self.zoom = self.map.getView().getZoom();
         });
 
         // Update position properties if map center change
-        this.map.getView().on('change:center', function() {
+        this.map.getView().on('change:center', function () {
           var centerLonLat = ol.proj.transform(self.map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326');
           self.longitude = centerLonLat[0];
           self.latitude = centerLonLat[1];
         });
 
-        this._observer = Polymer.dom(this).observeNodes( function(info) {
+        this._observer = Polymer.dom(this).observeNodes(function (info) {
           this.updateLayers();
         });
       },
@@ -136,49 +136,50 @@ The `osm-map` element renders a OpenStreetMap.
        * Call updateSize (http://dev.openlayers.org/docs/files/OpenLayers/Map-js.html#OpenLayers.Map.updateSize)
        * if window size changed.
        */
-      resize: function() {
+      resize: function () {
         if (this.map)
           this.map.updateSize();
       },
 
-      _computeCenter: function(longitude, latitude) {
+      _computeCenter: function (longitude, latitude) {
         return [Number(longitude), Number(latitude)];
       },
 
-      _setCenter: function(center) {
+      _setCenter: function (center) {
         if (this.map)
           this.map.getView().setCenter(ol.proj.fromLonLat(center));
       },
 
-      _setZoom: function(zoom) {
+      _setZoom: function (zoom) {
         if (this.map)
           this.map.getView().setZoom(zoom);
       },
 
       /**
        * Manage dynamically added child elements like layers, markers and polys.
-       * This function will also redraw the map if a `osm-point` added to a `osm-poly` element. 
+       * This function will also redraw the map if a `osm-point` added to a `osm-poly` element.
        */
-      updateLayers: function() {
-        if(this.map) {
+      updateLayers: function () {
+        if (this.map) {
           self = this;
           this.layers = [];
 
-          this.map.layers = this.layers; 
+          this.map.layers = this.layers;
 
-          $.each(this.queryAllEffectiveChildren('osm-layer'), function(index, layer) {
-            self.layers.push( layer.get() );
+          $.each(this.queryAllEffectiveChildren('osm-layer'), function (index, layer) {
+            self.layers.push(layer.get());
           });
 
-          if(this.layers.length <= 0)
-            self.layers.push( new ol.layer.Tile({ source: new ol.source.OSM() }) );
+          if (this.layers.length <= 0) {
+            self.layers.push(new ol.layer.Tile({source: new ol.source.OSM()}));
+          }
 
-          $.each(this.queryAllEffectiveChildren('osm-marker'), function(index, marker) {
-            self.layers.push( marker.getOsmMarker() );
+          $.each(this.queryAllEffectiveChildren('osm-marker'), function (index, marker) {
+            self.layers.push(marker.getOsmMarker());
           });
 
-          $.each(this.queryAllEffectiveChildren('osm-poly'), function(index, poly) {
-            self.layers.push( poly.polygon() );
+          $.each(this.queryAllEffectiveChildren('osm-poly'), function (index, poly) {
+            self.layers.push(poly.polygon());
           });
 
           $.each(this.layers, function (index, layer) {
