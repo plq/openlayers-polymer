@@ -81,28 +81,31 @@ Example:
         if (this.fillColor.charAt(0) == "#") {
           var h = "0123456789abcdef";
           var hex = this.fillColor.toLowerCase();
+
           var r = h.indexOf(hex[1]) * 16 + h.indexOf(hex[2]);
           var g = h.indexOf(hex[3]) * 16 + h.indexOf(hex[4]);
           var b = h.indexOf(hex[5]) * 16 + h.indexOf(hex[6]);
+
           return "rgba(" + r + ", " + g + ", " + b + ", " + fillOpacity + ")";
         }
-        else if (this.fillColor.substring(0, 4).toLowerCase() == "rgba") {
+
+        if (this.fillColor.substring(0, 4).toLowerCase() == "rgba") {
           console.warn('Polygon fill-color is an rgba value so fill-opacity will be overwritten!'
                   + ' You shout better use an rgb or hex value combined with fill-opacity attribute.');
           return this.fillColor;
         }
-        else if (this.fillColor.substring(0, 4).toLowerCase() == "rgb(") {
+
+        if (this.fillColor.substring(0, 4).toLowerCase() == "rgb(") {
           return "rgba" + this.fillColor.slice(3, -1) + "," + this.fillOpacity + ")";
         }
-        else { // assume this.fillColor must be a name like blue, white, black
-          dummy = document.createElement("div");
-          dummy.style.color = this.fillColor;
-          document.body.appendChild(dummy);
-          var rgbColor = window.getComputedStyle(dummy).color;
-          document.body.removeChild(dummy);
-          return "rgba" + rgbColor.slice(3, -1) + "," + this.fillOpacity + ")";
-        }
-        ;
+
+        // assume this.fillColor must be a name like blue, white, black
+        dummy = document.createElement("div");
+        dummy.style.color = this.fillColor;
+        document.body.appendChild(dummy);
+        var rgbColor = window.getComputedStyle(dummy).color;
+        document.body.removeChild(dummy);
+        return "rgba" + rgbColor.slice(3, -1) + "," + this.fillOpacity + ")";
       },
 
       polygon: function () {
