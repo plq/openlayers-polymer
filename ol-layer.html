@@ -2,21 +2,21 @@
 <script src="../openlayers/build/ol.js"></script>
 
 <!--
-The `osm-layer` element allows to add different layer typs to the `osm-map` element.
+The `ol-layer` element allows to add different layer typs to the `ol-map` element.
 
 #### Example
 
-    <osm-map>
-      <osm-layer source="sat"></osm-layer>
-    </osm-map>
+    <ol-map>
+      <ol-layer source="sat"></ol-layer>
+    </ol-map>
 
 @demo demo/index.html
 -->
 
-<dom-module id="osm-layer">
+<dom-module id="ol-layer">
   <script>
     Polymer({
-      is: 'osm-layer',
+      is: 'ol-layer',
 
       properties: {
         /**

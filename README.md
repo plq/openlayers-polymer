@@ -1,4 +1,4 @@
-# `osm-map` element
+# `ol-map` element
 
 An OpenStreetMap polymer implementation. Based on OpenLayers (v3.3.0) and written in polymer 1.0 style.
 
@@ -6,36 +6,36 @@ An OpenStreetMap polymer implementation. Based on OpenLayers (v3.3.0) and writte
 
 ### Basic
 
-	<osm-map longitude="{{ longitude }}" latitude="{{ latitude }}" zoom="{{ zoom }}"></osm-map>
+	<ol-map longitude="{{ longitude }}" latitude="{{ latitude }}" zoom="{{ zoom }}"></ol-map>
 	
 <img src="https://cloud.githubusercontent.com/assets/1525818/12798245/a2f8c61e-cac8-11e5-8ad5-e8ebb0dd781d.png" width="500"/>
 	
 ### Marker
 
-	<osm-map latitude="53.834089" longitude="10.703718" zoom="16">
-		<osm-marker longitude="10.703718" latitude="53.834089" scale="0.2" image="../data/marker-blue-shadow.png"></osm-marker>
-		<osm-marker longitude="10.705318" latitude="53.835789" image="../data/marker-green-icon-shadow.png"></osm-marker>
-		<osm-marker longitude="10.702318" latitude="53.832789" image="../data/marker-red.png"></osm-marker>
+	<ol-map latitude="53.834089" longitude="10.703718" zoom="16">
+		<ol-marker longitude="10.703718" latitude="53.834089" scale="0.2" image="../data/marker-blue-shadow.png"></ol-marker>
+		<ol-marker longitude="10.705318" latitude="53.835789" image="../data/marker-green-icon-shadow.png"></ol-marker>
+		<ol-marker longitude="10.702318" latitude="53.832789" image="../data/marker-red.png"></ol-marker>
 		<!-- marker without image attribute are displayed as circles -->
-		<osm-marker longitude="10.705318" latitude="53.830789"></osm-marker>
-		<osm-marker longitude="10.709318" latitude="53.839789" scale="2.5"></osm-marker>
-	</osm-map>
+		<ol-marker longitude="10.705318" latitude="53.830789"></ol-marker>
+		<ol-marker longitude="10.709318" latitude="53.839789" scale="2.5"></ol-marker>
+	</ol-map>
 
 ### Polygon
 
-    	<osm-poly fill fill-color="rgba(0,10,150,0.4)">
+    	<ol-poly fill fill-color="rgba(0,10,150,0.4)">
         	<template is="dom-repeat" items="{{ points }}">
-          		<osm-point longitude$="{{ item.longitude }}" latitude$="{{ item.latitude }}"></osm-point>
+          		<ol-point longitude$="{{ item.longitude }}" latitude$="{{ item.latitude }}"></ol-point>
         	</template>
-    	</osm-poly> 
+    	</ol-poly> 
 
-## Add `osm-map` component in your project
+## Add `ol-map` component in your project
 
 * Add bower dependency
 
   	    "dependencies": {
   		...,
-    	"osm-map": "FabianBormann/osm-map"
+    	"ol-map": "FabianBormann/ol-map"
   	    }
 
 2.  
@@ -44,11 +44,11 @@ An OpenStreetMap polymer implementation. Based on OpenLayers (v3.3.0) and writte
 	
 In your project.html
 
-	<link rel="import" href="path_to_bower_components/osm-map/osm-map.html">
-	<link rel="import" href="path_to_bower_components/osm-map/osm-marker.html">
-	<link rel="import" href="path_to_bower_components/osm-map/osm-point.html">
-	<link rel="import" href="path_to_bower_components/osm-map/osm-poly.html">
-	<link rel="import" href="path_to_bower_components/osm-map/osm-layer.html">
+	<link rel="import" href="path_to_bower_components/ol-map/ol-map.html">
+	<link rel="import" href="path_to_bower_components/ol-map/ol-marker.html">
+	<link rel="import" href="path_to_bower_components/ol-map/ol-point.html">
+	<link rel="import" href="path_to_bower_components/ol-map/ol-poly.html">
+	<link rel="import" href="path_to_bower_components/ol-map/ol-layer.html">
 
 Now you are ready to start using the components.
 
@@ -68,7 +68,7 @@ Then, go ahead and download the element's dependencies:
 
     bower install
 
-### Playing With osm-map
+### Playing With ol-map
 
 It's recommend that you use [Polyserve](https://github.com/PolymerLabs/polyserve) to keep the
 bower dependencies in line. You can install it via:
@@ -79,4 +79,4 @@ And you can run it via:
 
     polyserve
 
-Once running, you can preview your element at `http://localhost:8080/components/osm-map/`.
+Once running, you can preview your element at `http://localhost:8080/components/ol-map/`.

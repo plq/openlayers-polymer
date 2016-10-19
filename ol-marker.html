@@ -2,26 +2,26 @@
 <script src="../openlayers/build/ol.js"></script>
 
 <!--
-The `osm-marker` element draws a marker at the given position
+The `ol-marker` element draws a marker at the given position
 with a specified image. (Marker without image attribute are displayed as circles)
 
 Example:
 
-  <osm-map latitude="53.834089" longitude="10.703718" zoom="16">
-      <osm-marker longitude="10.703718" latitude="53.834089" scale="0.2" image="../data/marker-blue-shadow.png"></osm-marker>
-      <osm-marker longitude="10.705318" latitude="53.835789" image="../data/marker-green-icon-shadow.png"></osm-marker>
-      <osm-marker longitude="10.702318" latitude="53.832789" image="../data/marker-red.png"></osm-marker>
-      <osm-marker longitude="10.705318" latitude="53.830789"></osm-marker>
-      <osm-marker longitude="10.709318" latitude="53.839789" scale="2.5"></osm-marker>
-  </osm-map>
+  <ol-map latitude="53.834089" longitude="10.703718" zoom="16">
+      <ol-marker longitude="10.703718" latitude="53.834089" scale="0.2" image="../data/marker-blue-shadow.png"></ol-marker>
+      <ol-marker longitude="10.705318" latitude="53.835789" image="../data/marker-green-icon-shadow.png"></ol-marker>
+      <ol-marker longitude="10.702318" latitude="53.832789" image="../data/marker-red.png"></ol-marker>
+      <ol-marker longitude="10.705318" latitude="53.830789"></ol-marker>
+      <ol-marker longitude="10.709318" latitude="53.839789" scale="2.5"></ol-marker>
+  </ol-map>
 
 @demo demo/index.html
 -->
 
-<dom-module id="osm-marker">
+<dom-module id="ol-marker">
   <script>
     Polymer({
-      is: 'osm-marker',
+      is: 'ol-marker',
 
       properties: {
 

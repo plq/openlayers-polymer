@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>osm-map Demo</title>
+  <title>ol-map Demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../../paper-drawer-panel/paper-drawer-panel.html">
@@ -19,11 +19,11 @@
   <link rel="import" href="../../iron-icon/iron-icon.html">
   <link rel="import" href="../../iron-ajax/iron-ajax.html">
   <link rel="import" href="../../paper-styles/color.html">
-  <link rel="import" href="../osm-map.html">
-  <link rel="import" href="../osm-marker.html">
-  <link rel="import" href="../osm-layer.html">
-  <link rel="import" href="../osm-poly.html">
-  <link rel="import" href="../osm-point.html">
+  <link rel="import" href="../ol-map.html">
+  <link rel="import" href="../ol-marker.html">
+  <link rel="import" href="../ol-layer.html">
+  <link rel="import" href="../ol-polygon.html">
+  <link rel="import" href="../ol-point.html">
   <style type="text/css">
     html, body {
       height: 100%;
@@ -55,7 +55,7 @@
   <paper-drawer-panel>
     <paper-header-panel drawer>
       <paper-toolbar>
-        <h3><code>&lt;osm-map&gt;</code> Demo</h3>
+        <h3><code>&lt;ol-map&gt;</code> Demo</h3>
       </paper-toolbar>
       <div main>
         <paper-dropdown-menu label="Map source">
@@ -85,27 +85,27 @@
         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
       </paper-toolbar>
 
-      <osm-map class="content fit" latitude="41" longitude="29"  zoom="13">
-        <osm-layer source="osm"></osm-layer>
+      <ol-map class="content fit" latitude="41" longitude="29" zoom="13">
+        <ol-layer source="osm"></ol-layer>
 
-        <osm-marker latitude="41" longitude="29" ></osm-marker>
+        <ol-marker latitude="41" longitude="29"></ol-marker>
         <!-- FIXME: make color work again -->
-        <!--<osm-marker latitude="41" longitude="29" color="#00cc00"></osm-marker>-->
+        <!--<ol-marker latitude="41" longitude="29" color="#00cc00"></ol-marker>-->
 
-        <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red" closed>
-          <osm-point latitude="41.01" longitude="29.01"></osm-point>
-          <osm-point latitude="41.02" longitude="29.01"></osm-point>
-          <osm-point latitude="41.02" longitude="29.02"></osm-point>
-        </osm-poly>
+        <ol-polygon fill-opacity="0.5" fill-color="red" stroke-color="red" closed>
+          <ol-point latitude="41.01" longitude="29.01"></ol-point>
+          <ol-point latitude="41.02" longitude="29.01"></ol-point>
+          <ol-point latitude="41.02" longitude="29.02"></ol-point>
+        </ol-polygon>
 
-        <osm-poly fill-opacity="0.5" fill-color="blue" stroke-color="blue">
-          <osm-point latitude="40.998" longitude="28.998"></osm-point>
-          <osm-point latitude="40.996" longitude="28.998"></osm-point>
-          <osm-point latitude="40.996" longitude="28.996"></osm-point>
-          <osm-point latitude="40.998" longitude="28.996"></osm-point>
-          <osm-point latitude="40.998" longitude="28.998"></osm-point>
-        </osm-poly>
-      </osm-map>
+        <ol-polygon fill-opacity="0.5" fill-color="blue" stroke-color="blue">
+          <ol-point latitude="40.998" longitude="28.998"></ol-point>
+          <ol-point latitude="40.996" longitude="28.998"></ol-point>
+          <ol-point latitude="40.996" longitude="28.996"></ol-point>
+          <ol-point latitude="40.998" longitude="28.996"></ol-point>
+          <ol-point latitude="40.998" longitude="28.998"></ol-point>
+        </ol-polygon>
+      </ol-map>
     </paper-header-panel>
   </paper-drawer-panel>
 </template>

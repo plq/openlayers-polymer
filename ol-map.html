@@ -1,17 +1,17 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
-<link rel="import" href="osm-layer.html">
+<link rel="import" href="ol-layer.html">
 <link rel="stylesheet" href="../openlayers/css/ol.css" type="text/css">
 <script src="../jquery/dist/jquery.min.js"></script>
 <script src="../openlayers/build/ol.js"></script>
 
 <!--
-The `osm-map` element renders a OpenStreetMap.
+The `ol-map` element renders a OpenStreetMap.
 
 @demo demo/index.html
 -->
 
-<dom-module id="osm-map">
+<dom-module id="ol-map">
   <template>
     <style>
       :host {
@@ -33,7 +33,7 @@ The `osm-map` element renders a OpenStreetMap.
 
   <script>
     Polymer({
-      is: 'osm-map',
+      is: 'ol-map',
 
       properties: {
         /**
@@ -95,8 +95,8 @@ The `osm-map` element renders a OpenStreetMap.
       },
 
       /**
-       * Get osm-layer children and convert them to a ol.layer.Tile
-       * Compute all osm-marker and osm-poly components to ol.layer.Vector
+       * Get ol-layer children and convert them to a ol.layer.Tile
+       * Compute all ol-marker and ol-polygon components to ol.layer.Vector
        * Add all converted elements to the map.
        */
       attached: function () {
@@ -157,7 +157,7 @@ The `osm-map` element renders a OpenStreetMap.
 
       /**
        * Manage dynamically added child elements like layers, markers and polys.
-       * This function will also redraw the map if a `osm-point` added to a `osm-poly` element.
+       * This function will also redraw the map if a `ol-point` added to a `ol-polygon` element.
        */
       updateLayers: function () {
         if (this.map) {
@@ -166,7 +166,7 @@ The `osm-map` element renders a OpenStreetMap.
 
           this.map.layers = this.layers;
 
-          $.each(this.queryAllEffectiveChildren('osm-layer'), function (index, layer) {
+          $.each(this.queryAllEffectiveChildren('ol-layer'), function (index, layer) {
             self.layers.push(layer.get());
           });
 
@@ -174,11 +174,11 @@ The `osm-map` element renders a OpenStreetMap.
             self.layers.push(new ol.layer.Tile({source: new ol.source.OSM()}));
           }
 
-          $.each(this.queryAllEffectiveChildren('osm-marker'), function (index, marker) {
+          $.each(this.queryAllEffectiveChildren('ol-marker'), function (index, marker) {
             self.layers.push(marker.getOsmMarker());
           });
 
-          $.each(this.queryAllEffectiveChildren('osm-poly'), function (index, poly) {
+          $.each(this.queryAllEffectiveChildren('ol-polygon'), function (index, poly) {
             self.layers.push(poly.polygon());
           });
 
