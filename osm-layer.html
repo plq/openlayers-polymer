@@ -79,23 +79,17 @@ The `osm-layer` element allows to add different layer typs to the `osm-map` elem
        * See (http://openlayers.org/en/v3.8.2/apidoc/ol.layer.Tile.html)
        */
       get: function () {
-        if (this.source == "bing") {
+        if (this.source == "osm") {
           return new ol.layer.Tile({
             visible: this.visible,
             preload: this.preload,
-            source: new ol.source.BingMaps({
-              key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
-              imagerySet: this.bingMapStyle,
+            source: new ol.source.OSM({
               maxZoom: this.maxZoom
             })
           });
         }
         else {
-          return new ol.layer.Tile({
-            visible: this.visible,
-            preload: this.preload,
-            source: new ol.source.MapQuest({layer: this.source})
-          });
+          throw Error("Not implemented")
         }
       }
     });
