@@ -88,49 +88,39 @@
         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
       </paper-toolbar>
 
-      <osm-map class="content fit"
-               longitude="{{ longitude }}"
-               latitude="{{ latitude }}"
-               zoom="{{ zoom }}">
-        <osm-layer source="{{ mapSource }}"></osm-layer>
-        <osm-marker longitude="10.7001245" latitude="53.8338072"></osm-marker>
-        <osm-marker color="#00cc00" longitude="10.7000245" latitude="53.8638072"></osm-marker>
-        <osm-marker color="#0000cc" longitude="10.7010245" latitude="53.8238072"></osm-marker>
+      <osm-map class="content fit" latitude="41" longitude="29"  zoom="13">
+        <osm-layer source="osm"></osm-layer>
+
+        <osm-marker latitude="41" longitude="29" ></osm-marker>
+        <!-- FIXME: make color work again -->
+        <!--<osm-marker latitude="41" longitude="29" color="#00cc00"></osm-marker>-->
+
         <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red" closed>
-          <osm-point latitude="53.699089" longitude="10.603718"></osm-point>
-          <osm-point latitude="53.694089" longitude="10.608718"></osm-point>
-          <osm-point latitude="53.689089" longitude="10.603718"></osm-point>
+          <osm-point latitude="41.01" longitude="29.01"></osm-point>
+          <osm-point latitude="41.02" longitude="29.01"></osm-point>
+          <osm-point latitude="41.02" longitude="29.02"></osm-point>
         </osm-poly>
 
-        <osm-poly fill-opacity="0.5" fill-color="red" stroke-color="red">
-          <osm-point latitude="54.699089" longitude="11.603718"></osm-point>
-          <osm-point latitude="54.694089" longitude="11.608718"></osm-point>
-          <osm-point latitude="54.689089" longitude="11.603718"></osm-point>
-          <osm-point latitude="54.694089" longitude="11.598718"></osm-point>
+        <osm-poly fill-opacity="0.5" fill-color="blue" stroke-color="blue">
+          <osm-point latitude="40.998" longitude="28.998"></osm-point>
+          <osm-point latitude="40.996" longitude="28.998"></osm-point>
+          <osm-point latitude="40.996" longitude="28.996"></osm-point>
+          <osm-point latitude="40.998" longitude="28.996"></osm-point>
+          <osm-point latitude="40.998" longitude="28.998"></osm-point>
         </osm-poly>
       </osm-map>
-
     </paper-header-panel>
   </paper-drawer-panel>
 </template>
 </body>
 <script>
   var demo = document.querySelector('#demo');
-  demo.mapSource = "osm";
 
   demo.search = function (event) {
     var ajax = document.querySelector('#ajax');
     var search = document.querySelector('#search');
     ajax.url = "http://nominatim.openstreetmap.org/search?format=json&q=" + search.value;
     ajax.generateRequest();
-  }
-
-  demo.locate = function (event) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      demo.longitude = position.coords.longitude;
-      demo.latitude = position.coords.latitude;
-      demo.zoom = 18;
-    });
   }
 
   demo.finishedGeocoding = function (request) {
